@@ -1,6 +1,6 @@
 language: julia
 os:
-  - linux
+- linux
 julia:
   - 0.7
 notifications:
@@ -10,29 +10,20 @@ git:
 cache:
   timeout: 1000
   directories:
-    - downloads
+  - downloads
 env:
   global:
-    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
-    - BINARYBUILDER_AUTOMATIC_APPLE=true
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_AUTOMATIC_APPLE=true
 sudo: required
-
-# Before anything else, get the latest versions of things
 before_script:
   - julia -e 'using Pkg; Pkg.add([PackageSpec(name="BinaryBuilder", rev="sf/bb8"), PackageSpec(name="BinaryProvider")])'
-
 script:
-  - julia build_tarballs.jl
-
+- julia build_tarballs.jl
 deploy:
-    provider: releases
-    api_key:
-        # Note; this api_key is only valid for quinnj/MbedTLSBuilder; you need
-        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
-        secure: bTkkILCjIUmNftWaWns5BEvNAcw3MwPPTOMGsyVQJqvpPDVXHhIem8kqH2QcQLahGbwZkqXReHV2uxidDY3A2ss8TtXe/avYNv90Zg2wbaJkt1uMb+5dXccT5e+Bgk4H5YyyMhD0tp19Gs8WMH8Kn931WI6vf+nY+QXDmo6gZziUUL9wjsAPPeHN2Chof9T1mcz8iNl80uvNbRbBsLyihdx24puabNGx789z7jMD+cc/jvc3LHdbAT7U/8V+HTxXnndeDmCQTECJtaZ35H2JPG3h3hIIxtYJ9Nssiod+lYS96P2ljAALfj0a0pi04gYZzCK7gwuwkclC+VhtW/7dIXrS04STXdzts8Tp4iVdVUs39DbbrPq2IckxZ4ApwSrCsVstfIVwHgHPtCuE08tlZRmd3UrgOTg2T2q9JFN/UCTVncxB7qcp8zEPIxTEvwXCrKbkc/9DNPVLL5ODbUUaJ65GgCkttQHXr+re98dWIPiLy/N3Sk179weSnGIRVnONmBGt5kYu2mJrtUoN1kMJ9yKmxbu1q8JRQeuG0BRpBjTkDd9RP/ml3ZOvWTGhZXHWeSmZ/cNKuJ1nDBI8VJRRs2os6j47H52AfNLEv7wxQIQEN6u8MMFiZIDn6aX4IrTJ6OpnEjthpouFC2zB+1B9GdX6WeKU88iesQN9b+NSecc=
-    file_glob: true
-    file: products/*
-    skip_cleanup: true
-    on:
-        repo: JuliaDatabases/SQLiteBuilder
-        tags: true
+  provider: releases
+  api_key:
+    secure: TImWR+gaJt7ql0+fQG1PhgpQA66L7L8kAz3hcgZu8eIBwWA0dLKw1UUAT5gscHLDoLcj8EwFWMy3qSG7OiHR+NjfzcdHpNs9brZdP3SBmCtDE/Os9/dJgb6FiRlnxSIaCtlD8pSANFNkG0yXKdPf47HwyMsY4Q38EBmbmiDjqEs2gTtra+xkWK6vm7Q1tOHme2VkUt+4bcz/slc1bO45mJVYMS8DHOJympehigYauHdBGadRUF//WxpPzG68ouqh64da0lGkJt3HYLXAU8LMuJ7tOE5AGEnFMlaTpwt0bQIGIhpDX0sSxCCAYuMMn3jLkYdje/wGE+W33XgrlhQt2Fs3Dy79GC/RbvQBBN47VQtl8BSUWGlza8ZBO0NAo8xeWpjK7qAniqrLTgpbX0btRSZRfx/4nx9EioKh1tfJCEcchk3pnECzNx3odm+pKbhLtn21F7qRoLDUDWEv5bGsV5oZU5+WPQu2xjjmWotPaioYOg3EhJvbucZMr93Wtmub4b0RBq9JHH0smny2Z6wFdPPNC6b0N1sVga8m/gtA7TgNnOHNH4Zec6Q7vklfaTtRNnqLEIFzpJnaydshIexR7LSkT0hWUE/e/W8LtBBfefp8Oh7IF82ZcdItQ1oZ7iS+49p7aS6O5PVaec7Qu1jei2jkDEGBLVrz+ImCOF16l3g=
+  file: products/*
+  on:
+    repo: JuliaDatabases/SQLiteBuilder
