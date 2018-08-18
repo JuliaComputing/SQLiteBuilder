@@ -27,3 +27,4 @@ deploy:
   file: products/*
   on:
     repo: JuliaDatabases/SQLiteBuilder
+    tags: true
